@@ -1,0 +1,46 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using RPWA.Domain.Entities;
+using RPWA.Domain.Enums;
+using RPWA.Infrastructure.Data;
+
+namespace RPWA.Infrastructure;
+
+public static class SeedData
+{
+    public static void Initialize(IServiceProvider serviceProvider)
+    {
+        using var context = new RPWAContext(
+            serviceProvider.GetRequiredService<DbContextOptions<RPWAContext>>()
+        );
+
+        if (context == null || context.Contact == null)
+        {
+            throw new ArgumentNullException("context");
+        }
+
+        if (context.Contact.Any())
+        {
+            return;
+        }
+
+        context.Contact.AddRange(
+            new Contact
+            {
+                Id = 1,
+                Sin = "118 444 827",
+                FirstName = "John",
+                LastName = "Doe",
+                DateOfBirth = DateTime.Now,
+                Gender = Gender.male,
+                YearlyIncome = 80000,
+                PhoneNumber = "613-123-4567",
+                Email = "john@web.com",
+                Website = "www.johndoe.me",
+                IsFavorite = false
+            }
+        );
+
+        context.SaveChanges();
+    }
+}

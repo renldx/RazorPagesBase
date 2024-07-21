@@ -2,10 +2,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "C#: RazorPagesWebApp [Default Configuration]",
+      "name": "C#: RazorPagesBase [Default Configuration]",
       "type": "dotnet",
       "request": "launch",
-      "projectPath": "${workspaceFolder}/RazorPagesWebApp.csproj"
+      "projectPath": "${workspaceFolder}/RPWA.Web/RPWA.Web.csproj"
     }
   ]
 }
