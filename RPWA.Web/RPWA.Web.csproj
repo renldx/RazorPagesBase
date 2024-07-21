@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RPWA.Application\RPWA.Application.csproj" />
+    <ProjectReference Include="..\RPWA.Infrastructure\RPWA.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
