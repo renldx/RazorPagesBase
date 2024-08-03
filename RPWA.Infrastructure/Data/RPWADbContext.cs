@@ -8,5 +8,5 @@ public class RPWADbContext(DbContextOptions<RPWADbContext> options)
     : DbContext(options),
         IRPWADbContext
 {
-    public DbSet<Contact> Contact { get; set; } = default!;
+    public DbSet<Contact> Contacts { get; set; } = default!;
 }

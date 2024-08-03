@@ -25,7 +25,7 @@ public class GetContactsQueryHandler : IRequestHandler<GetContactsQuery, List<Co
     )
     {
         return await context
-            .Contact.AsNoTracking()
+            .Contacts.AsNoTracking()
             .ProjectTo<ContactDto>(mapper.ConfigurationProvider)
             .OrderBy(c => c.Id)
             .ToListAsync(cancellationToken);

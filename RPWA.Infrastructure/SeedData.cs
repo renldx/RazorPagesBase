@@ -14,17 +14,17 @@ public static class SeedData
             serviceProvider.GetRequiredService<DbContextOptions<RPWADbContext>>()
         );
 
-        if (context == null || context.Contact == null)
+        if (context == null || context.Contacts == null)
         {
             throw new ArgumentNullException("context");
         }
 
-        if (context.Contact.Any())
+        if (context.Contacts.Any())
         {
             return;
         }
 
-        context.Contact.AddRange(
+        context.Contacts.AddRange(
             new Contact
             {
                 Id = 1,

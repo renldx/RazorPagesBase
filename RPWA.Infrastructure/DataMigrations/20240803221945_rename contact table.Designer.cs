@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RPWA.Infrastructure.Data;
 
@@ -10,9 +11,11 @@ using RPWA.Infrastructure.Data;
 namespace RPWA.Infrastructure.DataMigrations
 {
     [DbContext(typeof(RPWADbContext))]
-    partial class RPWAContextModelSnapshot : ModelSnapshot
+    [Migration("20240803221945_rename contact table")]
+    partial class renamecontacttable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.7");

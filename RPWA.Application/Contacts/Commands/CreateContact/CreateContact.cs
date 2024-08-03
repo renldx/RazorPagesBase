@@ -23,7 +23,7 @@ public class CreateContactCommandHandler : IRequestHandler<CreateContactCommand,
     {
         var entity = new Contact { FirstName = request.FirstName, LastName = request.LastName };
 
-        context.Contact.Add(entity);
+        context.Contacts.Add(entity);
 
         await context.SaveChangesAsync(cancellationToken);
 

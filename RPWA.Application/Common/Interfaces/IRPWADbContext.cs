@@ -5,7 +5,7 @@ namespace RPWA.Application.Common.Interfaces;
 
 public interface IRPWADbContext
 {
-    DbSet<Contact> Contact { get; set; }
+    DbSet<Contact> Contacts { get; set; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
