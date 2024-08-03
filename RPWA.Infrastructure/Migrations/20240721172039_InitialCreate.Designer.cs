@@ -10,7 +10,7 @@ using RPWA.Infrastructure.Data;
 
 namespace RPWA.Infrastructure.DataMigrations
 {
-    [DbContext(typeof(RPWAContext))]
+    [DbContext(typeof(RPWADbContext))]
     [Migration("20240721172039_InitialCreate")]
     partial class InitialCreate
     {

@@ -1,10 +1,9 @@
 ﻿using RPWA.Domain.Enums;
 
-namespace RPWA.Domain.Entities;
+namespace RPWA.Application.Contacts.Queries.GetContacts;
 
-public class Contact
+public class ContactDto
 {
-    // TODO: Shouldn't be here?
     public int Id { get; set; }
 
     public string Sin { get; set; } = null!;

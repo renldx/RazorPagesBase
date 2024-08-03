@@ -9,7 +9,7 @@ using RPWA.Infrastructure.Data;
 
 namespace RPWA.Infrastructure.DataMigrations
 {
-    [DbContext(typeof(RPWAContext))]
+    [DbContext(typeof(RPWADbContext))]
     partial class RPWAContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -10,8 +10,8 @@ public static class SeedData
 {
     public static void Initialize(IServiceProvider serviceProvider)
     {
-        using var context = new RPWAContext(
-            serviceProvider.GetRequiredService<DbContextOptions<RPWAContext>>()
+        using var context = new RPWADbContext(
+            serviceProvider.GetRequiredService<DbContextOptions<RPWADbContext>>()
         );
 
         if (context == null || context.Contact == null)
