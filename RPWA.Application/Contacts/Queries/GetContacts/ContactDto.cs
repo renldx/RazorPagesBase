@@ -1,4 +1,6 @@
-﻿using RPWA.Domain.Enums;
+﻿using AutoMapper;
+using RPWA.Domain.Entities;
+using RPWA.Domain.Enums;
 
 namespace RPWA.Application.Contacts.Queries.GetContacts;
 
@@ -27,4 +29,12 @@ public class ContactDto
     public string Website { get; set; } = null!;
 
     public bool IsFavorite { get; set; }
+
+    private class Mapping : Profile
+    {
+        public Mapping()
+        {
+            CreateMap<Contact, ContactDto>();
+        }
+    }
 }
