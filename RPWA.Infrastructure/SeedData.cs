@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Bogus;
+using Bogus.Extensions.Canada;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RPWA.Domain.Entities;
 using RPWA.Domain.Enums;
@@ -24,22 +26,22 @@ public static class SeedData
             return;
         }
 
-        context.Contacts.AddRange(
-            new Contact
-            {
-                Id = 1,
-                Sin = "118 444 827",
-                FirstName = "John",
-                LastName = "Doe",
-                DateOfBirth = DateTime.Now,
-                Gender = Gender.male,
-                YearlyIncome = 80000,
-                PhoneNumber = "613-123-4567",
-                Email = "john@web.com",
-                Website = "www.johndoe.me",
-                IsFavorite = false
-            }
-        );
+        var fakeContact = new Faker<Contact>()
+            .RuleFor(c => c.Sin, f => f.Person.Sin())
+            .RuleFor(c => c.FirstName, f => f.Person.FirstName)
+            .RuleFor(c => c.LastName, f => f.Person.LastName)
+            .RuleFor(c => c.DateOfBirth, f => f.Person.DateOfBirth)
+            .RuleFor(c => c.Gender, f => f.PickRandom<Gender>())
+            .RuleFor(c => c.YearlyIncome, f => f.Random.Decimal(50000m, 100000))
+            .RuleFor(c => c.PhoneNumber, f => f.Person.Phone)
+            .RuleFor(c => c.Email, f => f.Person.Email)
+            .RuleFor(c => c.Website, f => f.Person.Website)
+            .RuleFor(c => c.IsFavorite, f => f.Random.Bool());
+
+        for (var i = 0; i < 10; i++)
+        {
+            context.Contacts.Add(fakeContact.Generate());
+        }
 
         context.SaveChanges();
     }
