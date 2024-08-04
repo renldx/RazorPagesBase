@@ -6,9 +6,9 @@ using RPWA.Application.Common.Interfaces;
 
 namespace RPWA.Application.Contacts.Queries.GetContacts;
 
-public record GetContactsQuery : IRequest<List<ContactDto>>;
+public record GetContactsQuery : IRequest<List<ContactBriefDto>>;
 
-public class GetContactsQueryHandler : IRequestHandler<GetContactsQuery, List<ContactDto>>
+public class GetContactsQueryHandler : IRequestHandler<GetContactsQuery, List<ContactBriefDto>>
 {
     private readonly IRPWADbContext context;
     private readonly IMapper mapper;
@@ -19,14 +19,14 @@ public class GetContactsQueryHandler : IRequestHandler<GetContactsQuery, List<Co
         this.mapper = mapper;
     }
 
-    public async Task<List<ContactDto>> Handle(
+    public async Task<List<ContactBriefDto>> Handle(
         GetContactsQuery request,
         CancellationToken cancellationToken
     )
     {
         return await context
             .Contacts.AsNoTracking()
-            .ProjectTo<ContactDto>(mapper.ConfigurationProvider)
+            .ProjectTo<ContactBriefDto>(mapper.ConfigurationProvider)
             .OrderBy(c => c.Id)
             .ToListAsync(cancellationToken);
     }
