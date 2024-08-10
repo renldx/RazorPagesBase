@@ -22,25 +22,25 @@ namespace RazorPagesWebApp.Pages.Contacts
                 Contacts = mapper.Map<List<ContactBriefVm>>(contacts);
             }
         }
-    }
 
-    public class ContactBriefVm
-    {
-        public int Id { get; init; }
-
-        public string Sin { get; init; } = null!;
-
-        public string Name => $"{FirstName} {LastName}";
-
-        public string FirstName { get; init; } = null!;
-
-        public string LastName { get; init; } = null!;
-
-        private class Mapping : Profile
+        public class ContactBriefVm
         {
-            public Mapping()
+            public int Id { get; init; }
+
+            public string Sin { get; init; } = null!;
+
+            public string Name => $"{FirstName} {LastName}";
+
+            public string FirstName { get; init; } = null!;
+
+            public string LastName { get; init; } = null!;
+
+            private class Mapping : Profile
             {
-                CreateMap<ContactBriefDto, ContactBriefVm>();
+                public Mapping()
+                {
+                    CreateMap<ContactBriefDto, ContactBriefVm>();
+                }
             }
         }
     }
