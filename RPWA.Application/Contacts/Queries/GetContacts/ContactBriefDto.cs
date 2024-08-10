@@ -19,7 +19,7 @@ public class ContactBriefDto
     {
         public Mapping()
         {
-            CreateMap<Contact, ContactBriefDto>();
+            CreateProjection<Contact, ContactBriefDto>();
         }
     }
 }

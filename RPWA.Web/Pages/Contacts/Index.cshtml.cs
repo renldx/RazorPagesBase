@@ -19,13 +19,7 @@ namespace RazorPagesWebApp.Pages.Contacts
 
             if (contacts is not null)
             {
-                Contacts = contacts.ConvertAll(c => new ContactBriefVm
-                {
-                    Id = c.Id,
-                    Sin = c.Sin,
-                    FirstName = c.FirstName,
-                    LastName = c.LastName
-                });
+                Contacts = mapper.Map<List<ContactBriefVm>>(contacts);
             }
         }
     }
@@ -41,5 +35,13 @@ namespace RazorPagesWebApp.Pages.Contacts
         public string FirstName { get; init; } = null!;
 
         public string LastName { get; init; } = null!;
+
+        private class Mapping : Profile
+        {
+            public Mapping()
+            {
+                CreateMap<ContactBriefDto, ContactBriefVm>();
+            }
+        }
     }
 }

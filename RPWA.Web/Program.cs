@@ -1,3 +1,4 @@
+using AutoMapper;
 using RPWA.Application;
 using RPWA.Infrastructure;
 
@@ -8,6 +9,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
+
+builder.Services.AddAutoMapper(config => config.AddMaps(new[] { "RPWA.Application", "RPWA.Web" }));
 
 var app = builder.Build();
 

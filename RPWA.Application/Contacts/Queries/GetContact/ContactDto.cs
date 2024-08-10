@@ -34,7 +34,7 @@ public class ContactDto
     {
         public Mapping()
         {
-            CreateMap<Contact, ContactDto>();
+            CreateProjection<Contact, ContactDto>();
         }
     }
 }
