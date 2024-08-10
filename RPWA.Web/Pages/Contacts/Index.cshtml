@@ -1,0 +1,54 @@
+@page
+@model RazorPagesWebApp.Pages.Contacts.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Contacts[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contacts[0].Sin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contacts[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contacts[0].LastName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var contact in Model.Contacts) {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => contact.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(model => contact.Sin)
+            </td>
+            <td>
+                @Html.DisplayFor(model => contact.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => contact.LastName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@contact.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@contact.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
