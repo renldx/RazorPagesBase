@@ -7,13 +7,13 @@ public class ContactBriefDto
 {
     public int Id { get; init; }
 
-    public string Sin { get; init; } = null!;
+    public string Sin { get; init; } = default!;
 
     public string Name => $"{FirstName} {LastName}";
 
-    public string FirstName { get; init; } = null!;
+    public string FirstName { get; init; } = default!;
 
-    public string LastName { get; init; } = null!;
+    public string LastName { get; init; } = default!;
 
     private class Mapping : Profile
     {

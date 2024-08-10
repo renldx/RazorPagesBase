@@ -38,23 +38,23 @@ namespace RazorPagesWebApp.Pages.Contacts
         {
             public int Id { get; init; }
 
-            public string Sin { get; init; } = null!;
+            public string Sin { get; init; } = default!;
 
             public string Name => $"{FirstName} {LastName}";
 
-            public string FirstName { get; init; } = null!;
+            public string FirstName { get; init; } = default!;
 
-            public string LastName { get; init; } = null!;
+            public string LastName { get; init; } = default!;
 
             public DateTime DateOfBirth { get; init; }
 
-            public decimal YearlyIncome { get; init; }
+            public decimal? YearlyIncome { get; init; }
 
-            public string PhoneNumber { get; init; } = null!;
+            public string? PhoneNumber { get; init; }
 
-            public string Email { get; init; } = null!;
+            public string? Email { get; init; }
 
-            public string Website { get; init; } = null!;
+            public string? Website { get; init; }
 
             public bool IsFavorite { get; init; }
 

@@ -4,6 +4,5 @@ public enum Gender
 {
     undefined,
     male,
-    female,
-    other
+    female
 }

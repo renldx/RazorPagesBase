@@ -6,8 +6,10 @@ namespace RPWA.Application.Contacts.Commands.CreateContact;
 
 public record CreateContactCommand : IRequest<int>
 {
-    public string? FirstName { get; init; }
-    public string? LastName { get; init; }
+    public string Sin { get; init; } = default!;
+    public string FirstName { get; init; } = default!;
+    public string LastName { get; init; } = default!;
+    public DateTime DateOfBirth { get; init; }
 }
 
 public class CreateContactCommandHandler : IRequestHandler<CreateContactCommand, int>
@@ -21,7 +23,13 @@ public class CreateContactCommandHandler : IRequestHandler<CreateContactCommand,
 
     public async Task<int> Handle(CreateContactCommand request, CancellationToken cancellationToken)
     {
-        var entity = new Contact { FirstName = request.FirstName, LastName = request.LastName };
+        var entity = new Contact
+        {
+            Sin = request.Sin,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            DateOfBirth = request.DateOfBirth
+        };
 
         context.Contacts.Add(entity);
 

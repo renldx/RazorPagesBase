@@ -7,10 +7,9 @@ using RPWA.Application.Contacts.Commands.CreateContact;
 
 namespace RazorPagesWebApp.Pages.Contacts
 {
-    public class CreateModel(IMediator mediator, IMapper mapper) : PageModel
+    public class CreateModel(IMediator mediator) : PageModel
     {
         private readonly IMediator mediator = mediator;
-        private readonly IMapper mapper = mapper;
 
         public IActionResult OnGet()
         {
@@ -32,8 +31,10 @@ namespace RazorPagesWebApp.Pages.Contacts
 
             var command = new CreateContactCommand
             {
+                Sin = Contact.Sin,
                 FirstName = Contact.FirstName,
-                LastName = Contact.LastName
+                LastName = Contact.LastName,
+                DateOfBirth = Contact.DateOfBirth
             };
 
             var contactId = await mediator.Send(command);
@@ -43,9 +44,14 @@ namespace RazorPagesWebApp.Pages.Contacts
 
         public class ContactVm
         {
-            public string FirstName { get; init; } = null!;
+            public string Sin { get; init; } = default!;
 
-            public string LastName { get; init; } = null!;
+            public string FirstName { get; init; } = default!;
+
+            public string LastName { get; init; } = default!;
+
+            [DataType(DataType.Date)]
+            public DateTime DateOfBirth { get; init; }
         }
     }
 }
