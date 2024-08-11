@@ -31,6 +31,7 @@ namespace RazorPagesWebApp.Pages.Contacts
             {
                 Contact = mapper.Map<ContactVm>(contact);
             }
+
             return Page();
         }
 

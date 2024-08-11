@@ -1,77 +1,94 @@
-// using System;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Threading.Tasks;
-// using Microsoft.AspNetCore.Mvc;
-// using Microsoft.AspNetCore.Mvc.RazorPages;
-// using Microsoft.AspNetCore.Mvc.Rendering;
-// using Microsoft.EntityFrameworkCore;
-// using Bakery.Data;
-// using Bakery.Models;
+using System.ComponentModel.DataAnnotations;
+using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using RPWA.Application.Contacts.Commands.UpdateContact;
+using RPWA.Application.Contacts.Queries.GetContact;
 
-// namespace Bakery.Pages.Products
-// {
-//     public class EditModel : PageModel
-//     {
-//         private readonly Bakery.Data.BakeryContext _context;
+namespace RazorPagesWebApp.Pages.Contacts
+{
+    public class EditModel(IMediator mediator, IMapper mapper) : PageModel
+    {
+        private readonly IMediator mediator = mediator;
+        private readonly IMapper mapper = mapper;
 
-//         public EditModel(Bakery.Data.BakeryContext context)
-//         {
-//             _context = context;
-//         }
+        [BindProperty]
+        public ContactVm Contact { get; set; } = default!;
 
-//         [BindProperty]
-//         public Product Product { get; set; } = default!;
+        public async Task<IActionResult> OnGetAsync(int? id)
+        {
+            if (id is null)
+            {
+                return NotFound();
+            }
 
-//         public async Task<IActionResult> OnGetAsync(int? id)
-//         {
-//             if (id == null || _context.Products == null)
-//             {
-//                 return NotFound();
-//             }
+            var query = new GetContactQuery(id.Value);
+            var contact = await mediator.Send(query);
 
-//             var product =  await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
-//             if (product == null)
-//             {
-//                 return NotFound();
-//             }
-//             Product = product;
-//             return Page();
-//         }
+            if (contact is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                Contact = mapper.Map<ContactVm>(contact);
+            }
 
-//         // To protect from overposting attacks, enable the specific properties you want to bind to.
-//         // For more details, see https://aka.ms/RazorPagesCRUD.
-//         public async Task<IActionResult> OnPostAsync()
-//         {
-//             if (!ModelState.IsValid)
-//             {
-//                 return Page();
-//             }
+            return Page();
+        }
 
-//             _context.Attach(Product).State = EntityState.Modified;
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see https://aka.ms/RazorPagesCRUD.
+        public async Task<IActionResult> OnPostAsync(int? id)
+        {
+            if (id is null)
+            {
+                return NotFound();
+            }
+            else if (!ModelState.IsValid || Contact is null)
+            {
+                return Page();
+            }
 
-//             try
-//             {
-//                 await _context.SaveChangesAsync();
-//             }
-//             catch (DbUpdateConcurrencyException)
-//             {
-//                 if (!ProductExists(Product.Id))
-//                 {
-//                     return NotFound();
-//                 }
-//                 else
-//                 {
-//                     throw;
-//                 }
-//             }
+            var command = new UpdateContactCommand
+            {
+                Id = id.Value,
+                FirstName = Contact.FirstName,
+                LastName = Contact.LastName
+            };
 
-//             return RedirectToPage("./Index");
-//         }
+            try
+            {
+                await mediator.Send(command);
+            }
+            catch
+            {
+                throw;
+            }
 
-//         private bool ProductExists(int id)
-//         {
-//           return (_context.Products?.Any(e => e.Id == id)).GetValueOrDefault();
-//         }
-//     }
-// }
+            return RedirectToPage("./Index");
+        }
+
+        public class ContactVm
+        {
+            public string Sin { get; init; } = default!;
+
+            public string FirstName { get; init; } = default!;
+
+            public string LastName { get; init; } = default!;
+
+            [DataType(DataType.Date)]
+            public DateTime DateOfBirth { get; init; }
+
+            private class Mapping : Profile
+            {
+                public Mapping()
+                {
+                    CreateMap<ContactDto, ContactVm>();
+                }
+            }
+        }
+    }
+}

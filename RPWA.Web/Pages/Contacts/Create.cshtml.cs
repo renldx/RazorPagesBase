@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,19 +10,14 @@ namespace RazorPagesWebApp.Pages.Contacts
     {
         private readonly IMediator mediator = mediator;
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
-
         [BindProperty]
         public ContactVm Contact { get; set; } = default!;
+
+        public void OnGet() { }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            //ModelState.Remove("Product.ImageName");
-
             if (!ModelState.IsValid || Contact is null)
             {
                 return Page();
@@ -37,7 +31,14 @@ namespace RazorPagesWebApp.Pages.Contacts
                 DateOfBirth = Contact.DateOfBirth
             };
 
-            var contactId = await mediator.Send(command);
+            try
+            {
+                await mediator.Send(command);
+            }
+            catch
+            {
+                throw;
+            }
 
             return RedirectToPage("./Index");
         }
