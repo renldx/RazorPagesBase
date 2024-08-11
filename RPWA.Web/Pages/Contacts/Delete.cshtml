@@ -1,5 +1,5 @@
-@* @page
-@model Bakery.Pages.Products.DeleteModel
+@page
+@model RazorPagesWebApp.Pages.Contacts.DeleteModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -9,38 +9,37 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Product</h4>
+    <h4>Contact</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Name)
+            @Html.DisplayNameFor(model => model.Contact.Sin)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Name)
+            @Html.DisplayFor(model => model.Contact.Sin)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Description)
+            @Html.DisplayNameFor(model => model.Contact.FirstName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Description)
+            @Html.DisplayFor(model => model.Contact.FirstName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Price)
+            @Html.DisplayNameFor(model => model.Contact.LastName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Price)
+            @Html.DisplayFor(model => model.Contact.LastName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.ImageName)
+            @Html.DisplayNameFor(model => model.Contact.DateOfBirth)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.ImageName)
+            @Html.DisplayFor(model => model.Contact.DateOfBirth)
         </dd>
     </dl>
     
     <form method="post">
-        <input type="hidden" asp-for="Product.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-page="./Index">Back to List</a>
     </form>
-</div> *@
+</div>
